@@ -264,13 +264,13 @@ def generate_soal_docx(list_soal, logo_kiri=None, logo_kanan=None):
 # 4. STREAMLIT UI
 # ==========================================
 st.set_page_config(page_title="App Kurikulum TJKT", layout="wide")
-st.title("📚 Sistem Manajemen Kurikulum TJKT")
+st.title("?? Sistem Manajemen Kurikulum TJKT")
 
-st.sidebar.markdown("### ⚙️ Pengaturan Kop Surat")
+st.sidebar.markdown("### ?? Pengaturan Kop Surat")
 logo_kiri = st.sidebar.file_uploader("Upload Logo Kiri (Pemprov):", type=["png", "jpg"])
 logo_kanan = st.sidebar.file_uploader("Upload Logo Kanan (Sekolah):", type=["png", "jpg"])
 
-tab1, tab2 = st.tabs(["📄 Modul Ajar & Job Sheet", "🎲 Generator Soal Acak"])
+tab1, tab2 = st.tabs(["?? Modul Ajar & Job Sheet", "?? Generator Soal Acak"])
 
 with tab1:
     col1, col2 = st.columns(2)
@@ -288,9 +288,9 @@ with tab1:
         
     if 'modul_doc' in st.session_state:
         c_dl1, c_dl2 = st.columns(2)
-        c_dl1.download_button("📥 Download Word (DOCX)", st.session_state['modul_doc'], "Modul.docx")
+        c_dl1.download_button("?? Download Word (DOCX)", st.session_state['modul_doc'], "Modul.docx")
         if st.session_state['modul_pdf']:
-            c_dl2.download_button("📥 Download PDF (Siswa)", st.session_state['modul_pdf'], "Modul.pdf")
+            c_dl2.download_button("?? Download PDF (Siswa)", st.session_state['modul_pdf'], "Modul.pdf")
 
 with tab2:
     bank_soal = []
@@ -299,7 +299,7 @@ with tab2:
             bank_soal.append({"elemen": el, "teks": re.sub(r'^\d+\.\s*', '', soal["tanya"]), "kunci": soal["jawab"]})
             
     jml = st.slider("Jumlah Soal:", 1, len(bank_soal), 3)
-    if st.button("🔄 Acak Soal Ujian"):
+    if st.button("?? Acak Soal Ujian"):
         st.session_state['soal_acak'] = random.sample(bank_soal, jml)
         st.session_state['soal_doc'] = generate_soal_docx(st.session_state['soal_acak'], logo_kiri, logo_kanan)
         st.session_state['soal_pdf'] = convert_docx_to_pdf(st.session_state['soal_doc'])
@@ -309,6 +309,6 @@ with tab2:
             st.write(f"**{idx}.** {item['teks']}")
         
         c_dl1, c_dl2 = st.columns(2)
-        c_dl1.download_button("📥 Download Lembar Soal (DOCX)", st.session_state['soal_doc'], "Soal.docx")
+        c_dl1.download_button("?? Download Lembar Soal (DOCX)", st.session_state['soal_doc'], "Soal.docx")
         if st.session_state['soal_pdf']:
-            c_dl2.download_button("📥 Download Lembar Soal (PDF)", st.session_state['soal_pdf'], "Soal.pdf")
+            c_dl2.download_button("?? Download Lembar Soal (PDF)", st.session_state['soal_pdf'], "Soal.pdf")
